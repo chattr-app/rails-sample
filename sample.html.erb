@@ -8,15 +8,19 @@
 <body>
   <!-- Set your API key in: ENV["CHATTR_API_KEY"] -->
   <script type="text/javascript" src="/api/chat.js?key=<%= ENV["CHATTR_API_KEY"] %>"></script>
+  <% if user_signed_in? %>
+    <script>
+      // Let's identify your current user (defined as current_user) in chattr!
+      _chattr.identify('<%= current_user.firstname %>', {
+        user_id: <%= current_user.id %>,
+        email: '<%= current_user.email %>',
+        plan: '<%= current_user.plan %>'
+      });
+      
+      // Initialize the widget AFTER identifying your current user
+    </script>
+  <% end %>
   <script>
-    // Let's identify your current user (defined as current_user) in chattr!
-    _chattr.identify('<%= current_user.firstname %>', {
-      user_id: <%= current_user.id %>,
-      email: '<%= current_user.email %>',
-      plan: '<%= current_user.plan %>'
-    });
-    
-    // Initialize the widget AFTER identifying your current user
     _chattr.init();
   </script>
 </body>
