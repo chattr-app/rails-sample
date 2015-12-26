@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>chattr widget - Rails sample</title>
+  <title>Slaask Rails Sample</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
 <body>
-  <!-- Set your API key in: ENV["CHATTR_API_KEY"] -->
-  <script type="text/javascript" src="/api/chat.js?key=<%= ENV["CHATTR_API_KEY"] %>"></script>
+  <script src='https://cdn.slaask.com/chat.js'></script>
+  
   <% if user_signed_in? %>
     <script>
-      // Let's identify your current user (defined as current_user) in chattr!
-      _chattr.identify('<%= current_user.firstname %>', {
+      _slaask.identify('<%= current_user.firstname %>', {
         user_id: <%= current_user.id %>,
         email: '<%= current_user.email %>',
         plan: '<%= current_user.plan %>'
       });
-      
-      // Initialize the widget AFTER identifying your current user
     </script>
   <% end %>
+  
+  <!-- Set your API key in: ENV["SLAASK_API_KEY"] -->
+  
   <script>
-    _chattr.init();
+    _slaask.init('<%= ENV["SLAASK_API_KEY"] %>');
   </script>
 </body>
 </html>
