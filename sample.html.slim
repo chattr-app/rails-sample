@@ -1,11 +1,14 @@
 = content_for :javascript
-  = javascript_include_tag("/api/chat.js?key=#{ENV["CHATTR_API_KEY"]}")
+  = javascript_include_tag('https://cdn.slaask.com/chat.js')
+
   - if user_signed_in?
     javascript:
-      _chattr.identify("#{current_user.firstname}", {
+      _slaask.identify("#{current_user.name}", {
         user_id: "#{current_user.id}",
         email: "#{current_user.email}",
-        plan: "#{current_user.plan}"
+        plan: "#{current_user.plan}",
+        widgets: "#{current_user.widget_ids.join(' - ')}"
       });
+      
   javascript:
-    _chattr.init();
+    _slaask.init("#{ENV["CHATTR_API_KEY"]}");
