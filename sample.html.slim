@@ -10,5 +10,8 @@
         widgets: "#{current_user.widget_ids.join(' - ')}"
       });
       
-  javascript:
-    _slaask.init("#{ENV["CHATTR_API_KEY"]}");
+      _slaask.init("#{ENV["CHATTR_API_KEY"]}", { visitor_token: "#{current_user.id}" });
+      
+  - else
+    javascript:
+      _slaask.init("#{ENV["CHATTR_API_KEY"]}");
